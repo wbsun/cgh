@@ -17,7 +17,7 @@ Current result:
 ```
 wbsun@fe:/mnt/cgh$ ./prime_set-test 10000000 ./primes-db/primes10000000.txt 1000 500000
 Contains: 347 us
-Inclusion: 10 us
+Inclusion: 437 us
 ```
 
 Note that the time shown above is 1000 times of operations, so a single operation takes only 1/1000 of the
