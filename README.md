@@ -14,9 +14,11 @@ by the last '1000') random primes read from the given prime number file. '500000
 the primes among which we choose the 1000 random primes to create a prime set.
 
 Current result:
- wbsun@fe:/mnt/cgh$ ./prime_set-test 10000000 ./primes-db/primes10000000.txt 1000 500000
- Contains: 347 us
- Inclusion: 10 us
+```
+wbsun@fe:/mnt/cgh$ ./prime_set-test 10000000 ./primes-db/primes10000000.txt 1000 500000
+Contains: 347 us
+Inclusion: 10 us
+```
 
 Note that the time shown above is 1000 times of operations, so a single operation takes only 1/1000 of the
 shown numbers.
