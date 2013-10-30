@@ -36,17 +36,19 @@ void PrimeSet::Remove(PrimeSet::ElemType e) {
 }
 
 bool PrimeSet::Contains(PrimeSet::ElemType e) const {
-  return size_ != 0 && mpz_divisible_ui_p(product_, e) != 0;
+  return mpz_divisible_ui_p(product_, e) != 0;
 }
 
 bool PrimeSet::Includes(const PrimeSet& ps) const {
   if (size_ < ps.size_) {
     return false;
-  } else if (size_ == ps.size_) {
-    return mpz_cmp(product_, ps.product_) == 0;
-  } else {
-    return mpz_divisible_p(product_, ps.product_) != 0;
   }
+  // Comment out for benchmarking
+  // else if (size_ == ps.size_) {
+    // return mpz_cmp(product_, ps.product_) == 0;
+  // } else {
+  return mpz_divisible_p(product_, ps.product_) != 0;
+  // }
 }
 
 bool PrimeSet::Equals(const PrimeSet& ps) const {
@@ -67,5 +69,9 @@ void PrimeSet::Differentiate(const PrimeSet& rhs, PrimeSet* r) const {
 }
 
 void PrimeSet::Minus(const PrimeSet& rhs, PrimeSet* r) const {
+}
+
+size_t PrimeSet::num_bits() const {
+  return mpz_sizeinbase(product_, 2);
 }
 

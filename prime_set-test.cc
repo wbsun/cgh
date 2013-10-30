@@ -7,7 +7,7 @@
 
 using namespace std;
 
-static const int NUM_TESTS = 1000;
+static int NUM_TESTS = 1000;
 
 void GeneratePrimeSet(const Primes& primes, int size, int range,
                       vector<int>* indecies, PrimeSet* ps) {
@@ -27,10 +27,18 @@ int main(int argc, char* argv[]) {
   Primes primes(upper_bound, filename);
   unique_ptr<PrimeSet[]> pss(new PrimeSet[NUM_TESTS]);
   vector<int> indecies;
+  cout << "Generating sets: ";
+  cout.flush();
   for (int i = 0; i < NUM_TESTS; ++i) {
     GeneratePrimeSet(primes, size, range, &indecies, &pss[i]);
+    if (i % 10 == 0) {
+      cout << ".";
+      cout.flush();
+    }
   }
-
+  
+  cout << " Done\nRun contains ...";
+  cout.flush();
   utils::Timing tm;
   tm.Start();
   bool r = false;
@@ -39,15 +47,27 @@ int main(int argc, char* argv[]) {
     r = r || pss[i].Contains(p);
   }
   tm.Stop();
-  cout << "Contains: " << tm.ElapsedTime() << " us" << endl;
+  cout << " Contains: " << tm.ElapsedTime() << " us" << endl;
 
+  cout << "Run inclusion ...";
+  cout.flush();
   tm.Start();
   r = false;
   for (int i = 0; i < NUM_TESTS; ++i) {
     r = r || pss[i].Includes(pss[NUM_TESTS-i-1]);
   }
   tm.Stop();
-  cout << "Inclusion: " << tm.ElapsedTime() << " us" << endl;
+  cout << " Inclusion: " << tm.ElapsedTime() << " us" << endl;
+
+  cout << "Run equals ...";
+  cout.flush();
+  tm.Start();
+  r = false;
+  for (int i = 0; i < NUM_TESTS; ++i) {
+    r = r || pss[i].Equals(pss[NUM_TESTS-i-1]);
+  }
+  tm.Stop();
+  cout << " Equals: " << tm.ElapsedTime() << " us" << endl;
 
   return 0;
 }

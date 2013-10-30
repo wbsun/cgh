@@ -28,6 +28,8 @@ class PrimeSet {
   void Differentiate(const PrimeSet& rhs, PrimeSet* r) const;
   void Minus(const PrimeSet& rhs, PrimeSet* r) const;
 
+  size_t num_bits() const;
+  
  private:
   mpz_t product_;
   int size_;
