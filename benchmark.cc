@@ -1,3 +1,5 @@
+#include "benchmark.h"
+
 SetDataSuite::SetDataSuite(int num_sets, int size, int range, const Primes& primes)
     : num_sets_(num_sets), size_(size), range_(range), primes_(primes) {}
 
