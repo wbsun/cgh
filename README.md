@@ -8,7 +8,7 @@ Compile and Run:
   - make
   - ./prime_set-test 10000000 ./primes-db/primes10000000.txt 1000 500000
 
-The program tests 1000 times of operations (currently only "Contains" and "Inclusion"). 
+The program tests 1000 times of operations. 
 The command run above creates 1000 (hard-coded number) prime sets, each of them contains 1000 (specified 
 by the last '1000') random primes read from the given prime number file. '500000' specifies the number of
 the primes among which we choose the 1000 random primes to create a prime set.
