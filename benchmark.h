@@ -3,6 +3,10 @@
 
 #include "primes.h"
 
+#include <vector>
+#include <string>
+#include <utility>
+
 class SetDataSuite {
  public:
   struct SetData {
