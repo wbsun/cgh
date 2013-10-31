@@ -60,9 +60,11 @@ bool PrimeSet::Equals(const PrimeSet& ps) const {
 }
 
 void PrimeSet::Union(const PrimeSet& rhs, PrimeSet* r) const {
+  mpz_lcm(r->product_, product_, rhs.product_);
 }
 
 void PrimeSet::Intersect(const PrimeSet& rhs, PrimeSet* r) const {
+  mpz_gcd(r->product_, product_, rhs.product_);
 }
 
 void PrimeSet::Differentiate(const PrimeSet& rhs, PrimeSet* r) const {

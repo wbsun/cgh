@@ -21,6 +21,7 @@ class Timing {
   struct timeval begin_, end_;
 };
 
+
 }  // namespace utils
 
 #endif
