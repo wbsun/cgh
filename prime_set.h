@@ -30,9 +30,15 @@ class PrimeSet {
 
   size_t num_bits() const;
   
- private:
+ protected:
   mpz_t product_;
   int size_;
 };
 
+class IterablePrimeSet : public PrimeSet {
+ public:
+  IterablePrimeSet() : PrimeSet() {}
+  IterablePrimeSet(const IterablePrimeSet& ps);
+  virtual ~IterablePrimeSet();
+};
 #endif
