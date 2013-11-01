@@ -2,7 +2,6 @@
 #define CGH_PRIME_SET_H
 
 #include <gmpxx.h>
-#include <unordered_set>
 
 class PrimeSet {
  public:
@@ -15,18 +14,18 @@ class PrimeSet {
   const PrimeSet& operator=(const PrimeSet& ps);
 
   // REQUIRES: e not in this
-  void Insert(ElemType e);
+  virtual void Insert(ElemType e);
   // REQUIRES: e in this
-  void Remove(ElemType e);
-  bool Contains(ElemType e) const;
+  virtual void Remove(ElemType e);
+  virtual bool Contains(ElemType e) const;
 
-  bool Includes(const PrimeSet& ps) const;
-  bool Equals(const PrimeSet& ps) const;
+  virtual bool Includes(const PrimeSet& ps) const;
+  virtual bool Equals(const PrimeSet& ps) const;
 
-  void Union(const PrimeSet& rhs, PrimeSet* r) const;
-  void Intersect(const PrimeSet& rhs, PrimeSet* r) const;
-  void Differentiate(const PrimeSet& rhs, PrimeSet* r) const;
-  void Minus(const PrimeSet& rhs, PrimeSet* r) const;
+  virtual void Union(const PrimeSet& rhs, PrimeSet* r) const;
+  virtual void Intersect(const PrimeSet& rhs, PrimeSet* r) const;
+  virtual void Differentiate(const PrimeSet& rhs, PrimeSet* r) const;
+  virtual void Minus(const PrimeSet& rhs, PrimeSet* r) const;
 
   size_t num_bits() const;
   
@@ -35,10 +34,4 @@ class PrimeSet {
   int size_;
 };
 
-class IterablePrimeSet : public PrimeSet {
- public:
-  IterablePrimeSet() : PrimeSet() {}
-  IterablePrimeSet(const IterablePrimeSet& ps);
-  virtual ~IterablePrimeSet();
-};
 #endif

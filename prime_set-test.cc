@@ -104,5 +104,23 @@ int main(int argc, char* argv[]) {
   tm.Stop();
   cout << " Intersect: " << tm.ElapsedTime() << " ns" << endl;
 
+  cout << "Run diff ...";
+  cout.flush();
+  tm.Start();
+  for (int i = 0; i < NUM_TESTS; ++i) {
+    pss[i].Intersect(pss[NUM_TESTS-i-1], &res);
+  }
+  tm.Stop();
+  cout << " Diff: " << tm.ElapsedTime() << " ns" << endl;
+
+  cout << "Run minus ...";
+  cout.flush();
+  tm.Start();
+  for (int i = 0; i < NUM_TESTS; ++i) {
+    pss[i].Minus(pss[NUM_TESTS-i-1], &res);
+  }
+  tm.Stop();
+  cout << " Minus: " << tm.ElapsedTime() << " ns" << endl;
+
   return 0;
 }
