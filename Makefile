@@ -6,7 +6,7 @@ CXXFLAGS_NO_OPT = -O0 -std=c++0x -Wall
 LDFLAGS = 
 GMP_LDFLAGS = -lgmpxx -lgmp
 
-OBJS = primes.o prime_set.o utils.o benchmark.o eval_sets.o hashset.o treeset.o
+OBJS = primes.o prime_set.o utils.o benchmark.o eval_sets.o hashset.o treeset.o array_set.o
 LIBS =
 TEST-OBJS = primes-test.o
 TEST-EXES = primes-test
@@ -32,16 +32,19 @@ utils.o: utils.cc utils.h
 benchmark.o: benchmark.cc benchmark.h utils.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-hashset.o: hashset.cc hashset.h utils.h
+hashset.o: hashset.cc hashset.h utils.h benchmark.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-treeset.o: treeset.cc treeset.h utils.h
+treeset.o: treeset.cc treeset.h utils.h benchmark.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+array_set.o: array_set.cc array_set.h utils.h benchmark.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 eval_sets.o: eval_sets.cc *.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-eval_sets: primes.o utils.o benchmark.o prime_set.o hashset.o treeset.o eval_sets.o
+eval_sets: primes.o utils.o benchmark.o prime_set.o hashset.o treeset.o array_set.o eval_sets.o
 	$(CXX) $^ -o $@ $(LDFLAGS) $(GMP_LDFLAGS)
 
 .PHONY:	clean

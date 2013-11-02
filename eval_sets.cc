@@ -1,6 +1,7 @@
 #include "prime_set.h"
 #include "hashset.h"
 #include "treeset.h"
+#include "array_set.h"
 #include "utils.h"
 #include "benchmark.h"
 
@@ -38,11 +39,16 @@ int main(int argc, char* argv[]) {
   cout << endl;
 
   DoBenchmark<HashSet>("HashSet", data_suite, contains_true_ratio,
-                        includes_true_ratio, equals_true_ratio);
+                       includes_true_ratio, equals_true_ratio);
 
   cout << endl;
 
   DoBenchmark<TreeSet>("TreeSet", data_suite, contains_true_ratio,
+                       includes_true_ratio, equals_true_ratio);
+
+  cout << endl;
+
+  DoBenchmark<ArraySet>("ArraySet", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio);
   
   return 0;
