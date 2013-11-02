@@ -7,7 +7,7 @@
 #include <unordered_set>
 
 class HashSet {
-public:
+ public:
   HashSet();
   HashSet(const HashSet& hs);
   HashSet(const SetDataSuite::SetData& data);
@@ -27,7 +27,7 @@ public:
   virtual void Differentiate(const HashSet& rhs, HashSet* r) const;
   virtual void DiffSym(const HashSet& rhs, HashSet* r) const;
   
-protected:
+ protected:
   std::unordered_set<utils::Element> set_;
 };
 

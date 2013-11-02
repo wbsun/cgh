@@ -20,8 +20,8 @@ void SetDataSuite::CreateAllSetData() {
       d.data.push_back(utils::Element(primes_.GetPrime(idx), j));
     }
     d.for_insert = utils::Element(primes_.GetPrime(indecies[size_+1]), size_+1);
-    d.for_remove = utils::Element(primes_.GetPrime(indecies[size_/4]), size_/4);
-    d.for_contains_in = utils::Element(primes_.GetPrime(indecies[size_/3]), size_/3);
+    d.for_remove = utils::Element(primes_.GetPrime(indecies[size_/5]), size_/m4);
+    d.for_contains_in = utils::Element(primes_.GetPrime(indecies[size_/4]), size_/3);
     d.for_contains_not_in = utils::Element(primes_.GetPrime(indecies[size_+2]), size_+2);
   }
 }

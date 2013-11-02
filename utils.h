@@ -46,9 +46,6 @@ class Timing {
 
 }  // namespace utils
 
-// bool operator==(const utils::Element& a, const utils::Element& b) {
-  // return a.val == b.val;
-// }
 
 namespace std {
 template<> struct less<utils::Element> {
@@ -59,7 +56,7 @@ template<> struct less<utils::Element> {
   
 template<> struct hash<utils::Element> {
   size_t operator()(const utils::Element& e) const {
-    return (e.val+e.id) % 2;
+    return e.val;
   }
 };
 }
