@@ -47,7 +47,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   if (!latex)
     std::cout << "Benchmark on " << title << std::endl;
   else
-    std::cout << title << " ";
+    std::cout << "& " << title << " ";
 
   long includes_time = 0,
       equals_time = 0,

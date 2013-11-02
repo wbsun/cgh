@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 
 
   if (latex_output)
-    cout << "\\multirow{4}{*}{" << double(set_size)/(double)primes_range << "} & ";
+    cout << "\\multirow{4}{*}{" << double(set_size)/(double)primes_range << "}  ";
 
   Primes primes(10000000, filename);
   SetDataSuite data_suite(num_sets, set_size, primes_range, primes);
