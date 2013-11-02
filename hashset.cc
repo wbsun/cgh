@@ -8,8 +8,8 @@ HashSet::HashSet(const HashSet& ps) {
 }
 
 HashSet::HashSet(const SetDataSuite::SetData& data) {
-  for (int i : data.data) {
-    set_.insert((HashSet::ElemType)i);
+  for (utils::Element i : data.data) {
+    set_.insert(i);
   }
 }
 
@@ -18,15 +18,15 @@ const HashSet& HashSet::operator=(const HashSet& ps) {
   return *this;
 }
 
-void HashSet::Insert(HashSet::ElemType e) {
+void HashSet::Insert(utils::Element e) {
   set_.insert(e);
 }
 
-void HashSet::Remove(HashSet::ElemType e) {
+void HashSet::Remove(utils::Element e) {
   set_.erase(e);
 }
 
-bool HashSet::Contains(HashSet::ElemType e) const {
+bool HashSet::Contains(utils::Element e) const {
   return set_.find(e) != set_.end();
 }
 

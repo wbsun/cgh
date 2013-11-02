@@ -17,11 +17,11 @@ void SetDataSuite::CreateAllSetData() {
     utils::RandomIndecies(0, range_-1, &indecies);
     for (int j = 0; j < size_; ++j) {
       int idx = indecies[j];
-      d.data.push_back(primes_.GetPrime(idx));
+      d.data.push_back(utils::Element(primes_.GetPrime(idx), j));
     }
-    d.for_insert = primes_.GetPrime(indecies[size_]);
-    d.for_remove = primes_.GetPrime(indecies[0]);
-    d.for_contains_in = primes_.GetPrime(indecies[1]);
-    d.for_contains_not_in = primes_.GetPrime(indecies[size_+1]);
+    d.for_insert = utils::Element(primes_.GetPrime(indecies[size_+1]), size_+1);
+    d.for_remove = utils::Element(primes_.GetPrime(indecies[size_/4]), size_/4);
+    d.for_contains_in = utils::Element(primes_.GetPrime(indecies[size_/3]), size_/3);
+    d.for_contains_not_in = utils::Element(primes_.GetPrime(indecies[size_+2]), size_+2);
   }
 }

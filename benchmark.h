@@ -12,11 +12,11 @@
 class SetDataSuite {
  public:
   struct SetData {
-    std::vector<int> data;
-    int for_insert;
-    int for_remove;
-    int for_contains_in;
-    int for_contains_not_in;
+    std::vector<utils::Element> data;
+    utils::Element for_insert;
+    utils::Element for_remove;
+    utils::Element for_contains_in;
+    utils::Element for_contains_not_in;
   };
   
   SetDataSuite(int num_sets, int size, int range, const Primes& primes);

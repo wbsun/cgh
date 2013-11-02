@@ -8,8 +8,8 @@ GMP_LDFLAGS = -lgmpxx -lgmp
 
 OBJS = primes.o prime_set.o utils.o benchmark.o eval_sets.o hashset.o
 LIBS =
-TEST-OBJS = primes-test.o prime_set-test.o
-TEST-EXES = primes-test prime_set-test
+TEST-OBJS = primes-test.o
+TEST-EXES = primes-test
 EXES = eval_sets
 
 default: $(LIBS) $(EXES) $(TEST-EXES)
@@ -25,12 +25,6 @@ primes-test: primes-test.o primes.o
 
 prime_set.o: prime_set.cc prime_set.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-prime_set-test.o: prime_set-test.cc *.h
-	$(CXX) -c $(CXXFLAGS_NO_OPT) $< -o $@
-
-prime_set-test: prime_set-test.o prime_set.o primes.o utils.o
-	$(CXX) $^ -o $@ $(LDFLAGS) $(GMP_LDFLAGS)
 
 utils.o: utils.cc utils.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@

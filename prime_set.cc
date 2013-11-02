@@ -18,8 +18,8 @@ PrimeSet::PrimeSet(const PrimeSet& ps) {
 PrimeSet::PrimeSet(const SetDataSuite::SetData& data) {
   mpz_init_set_ui(product_, 1UL);
   size_ = data.data.size();
-  for (int i : data.data) {
-    mpz_mul_ui(product_, product_, (unsigned long)i);
+  for (auto i : data.data) {
+    mpz_mul_ui(product_, product_, i.val);
   }
 }
 
@@ -33,18 +33,18 @@ const PrimeSet& PrimeSet::operator=(const PrimeSet& ps) {
   return *this;
 }
 
-void PrimeSet::Insert(PrimeSet::ElemType e) {
-  mpz_mul_ui(product_, product_, e);
+void PrimeSet::Insert(utils::Element e) {
+  mpz_mul_ui(product_, product_, e.val);
   ++size_;
 }
 
-void PrimeSet::Remove(PrimeSet::ElemType e) {
-  mpz_divexact_ui(product_, product_, e);
+void PrimeSet::Remove(utils::Element e) {
+  mpz_divexact_ui(product_, product_, e.val);
   --size_;
 }
 
-bool PrimeSet::Contains(PrimeSet::ElemType e) const {
-  return mpz_divisible_ui_p(product_, e) != 0;
+bool PrimeSet::Contains(utils::Element e) const {
+  return mpz_divisible_ui_p(product_, e.val) != 0;
 }
 
 bool PrimeSet::Includes(const PrimeSet& ps) const {
@@ -80,7 +80,7 @@ void PrimeSet::Differentiate(const PrimeSet& rhs, PrimeSet* r) const {
   mpz_init_set_ui(gcd, 1UL);
   mpz_gcd(gcd, product_, rhs.product_);
 
-  PrimeSet::ElemType ul_gcd;
+  unsigned long ul_gcd;
   if (mpz_cmp_ui(gcd, 1)) {
     if (mpz_fits_ulong_p(gcd)) {
       ul_gcd = mpz_get_ui(gcd);
@@ -99,7 +99,7 @@ void PrimeSet::DiffSym(const PrimeSet& rhs, PrimeSet* r) const {
 
   // More optimization: whether gcd == this or rhs.
   
-  PrimeSet::ElemType ul_gcd;
+  unsigned long ul_gcd;
   if (mpz_cmp_ui(gcd, 1)) {
     if (mpz_fits_ulong_p(gcd)) {
       ul_gcd = mpz_get_ui(gcd);

@@ -2,12 +2,12 @@
 #define CGH_PRIME_SET_H
 
 #include "benchmark.h"
+#include "utils.h"
 
 #include <gmpxx.h>
 
 class PrimeSet {
  public:
-  typedef unsigned long ElemType;
   PrimeSet();
   PrimeSet(const mpz_t p, int size);
   PrimeSet(const PrimeSet& ps);
@@ -17,10 +17,10 @@ class PrimeSet {
   const PrimeSet& operator=(const PrimeSet& ps);
 
   // REQUIRES: e not in this
-  virtual void Insert(ElemType e);
+  virtual void Insert(utils::Element e);
   // REQUIRES: e in this
-  virtual void Remove(ElemType e);
-  virtual bool Contains(ElemType e) const;
+  virtual void Remove(utils::Element e);
+  virtual bool Contains(utils::Element e) const;
 
   virtual bool Includes(const PrimeSet& ps) const;
   virtual bool Equals(const PrimeSet& ps) const;

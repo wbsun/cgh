@@ -1,5 +1,6 @@
 #include "prime_set.h"
 #include "hashset.h"
+// #include "treeset.h"
 #include "utils.h"
 #include "benchmark.h"
 
@@ -29,10 +30,12 @@ int main(int argc, char* argv[]) {
   SetDataSuite data_suite(num_sets, set_size, primes_range, primes);
   cout << "Generating all set data ... "; cout.flush();
   data_suite.CreateAllSetData();
-  cout << "Done" << endl;
+  cout << "Done\n" << endl;
 
   DoBenchmark<PrimeSet>("PrimeSet", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio);
+
+  cout << endl;
 
   DoBenchmark<HashSet>("HashSet", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio);
