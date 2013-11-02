@@ -1,5 +1,10 @@
 #include "array_set.h"
 
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
 ArraySet::ArraySet() {
 }
 
@@ -48,30 +53,41 @@ bool ArraySet::Equals(const ArraySet& ps) const {
 }
 
 void ArraySet::Union(const ArraySet& rhs, ArraySet* r) const {
-  r->set_.clear();
-  r->set_.resize(set_.size() + rhs.set_.size());
+  vector<utils::Element> tmp(set_.size() + rhs.set_.size());
   auto it = std::set_union(set_.begin(), set_.end(),
                            rhs.set_.begin(), rhs.set_.end(),
-                           r->set_.begin());
-  r->set_.resize(it - r->set_.begin());
+                           tmp.begin());
+  tmp.resize(it - tmp.begin());
+  r->set_.clear();
+  for (auto e : tmp) {
+    r->set_.push_back(e);
+  }
 }
 
 void ArraySet::Intersect(const ArraySet& rhs, ArraySet* r) const {
-  r->set_.clear();
-  r->set_.resize(set_.size() + rhs.set_.size());
+  vector<utils::Element> tmp(set_.size() + rhs.set_.size());
   auto it = std::set_intersection(set_.begin(), set_.end(),
                                   rhs.set_.begin(), rhs.set_.end(),
-                                  r->set_.begin());
-  r->set_.resize(it - r->set_.begin());
+                                  tmp.begin());
+  tmp.resize(it - tmp.begin());
+  r->set_ = tmp;
+  r->set_.clear();
+  for (auto e : tmp) {
+    r->set_.push_back(e);
+  }
 }
 
 void ArraySet::Differentiate(const ArraySet& rhs, ArraySet* r) const {
-  r->set_.clear();
-  r->set_.resize(set_.size() + rhs.set_.size());
+  vector<utils::Element> tmp(set_.size() + rhs.set_.size());
   auto it = std::set_difference(set_.begin(), set_.end(),
                                 rhs.set_.begin(), rhs.set_.end(),
-                                r->set_.begin());
-  r->set_.resize(it - r->set_.begin());
+                                tmp.begin());
+  tmp.resize(it - tmp.begin());
+  r->set_ = tmp;
+  r->set_.clear();
+  for (auto e : tmp) {
+    r->set_.push_back(e);
+  }
 }
 
 void ArraySet::DiffSym(const ArraySet& rhs, ArraySet* r) const {

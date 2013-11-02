@@ -43,7 +43,6 @@ class Timing {
   struct timeval begin_, end_;
 };
 
-
 }  // namespace utils
 
 
@@ -56,7 +55,7 @@ template<> struct less<utils::Element> {
   
 template<> struct hash<utils::Element> {
   size_t operator()(const utils::Element& e) const {
-    return e.val;
+    return e.val / (e.id+1);
   }
 };
 }
