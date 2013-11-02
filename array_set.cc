@@ -40,8 +40,13 @@ bool ArraySet::Contains(utils::Element e) const {
 }
 
 bool ArraySet::Includes(const ArraySet& ps) const {
-  return std::includes(set_.begin(), set_.end(),
-                       ps.set_.begin(), ps.set_.end());
+  // return std::includes(set_.begin(), set_.end(),
+                       // ps.set_.begin(), ps.set_.end());
+  for (auto e : ps.set_) {
+    if (!Contains(e))
+      return false;
+  }
+  return true;
 }
 
 bool ArraySet::Equals(const ArraySet& ps) const {
