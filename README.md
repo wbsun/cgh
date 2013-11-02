@@ -26,4 +26,9 @@ Implementation:
 
 Output:
   Times show are in nanoseconds for each single operation.
+
+Explaination:
+  GMP is highly optimized on modern CPUs to operate at very long data types with a single instruction.
+  Instruction sets such as SSE and AVX can do 256 bits or even 512 bits data arithmetic operations.
+  
   
