@@ -29,10 +29,15 @@ void SetDataSuite::CreateAllSetData() {
 }
 
 template<typename SetType>
-void DoBenchmark(std::vector<SetType*> sets, std::string title, const SetDataSuite& set_data,
+void DoBenchmark(std::string title, SetType type, const SetDataSuite& set_data,
                  int contains_true_ratio, int includes_true_ratio,
                  int equals_true_ratio) {
   cout << "Benchmark on " << title << endl;
+
+  vector<SetType*> sets;
+  for (int i = 0; i < set_data.num_sets(); ++i) {
+    sets.push_back(new SetType(set_data.GetSetData(i)));
+  }
 
   int threshold = 0;
   utils::Timing tm;
@@ -122,6 +127,7 @@ void DoBenchmark(std::vector<SetType*> sets, std::string title, const SetDataSui
   cout << (tm.ElapsedTime()*1000) / sets.size() << " ns" << endl;
 
   for (int i = 0; i < sets.size(); ++i) {
+    delete sets[i];
     delete dup_sets[i];
     delete dup_sets_insert[i];
     delete dup_sets_remove[i];

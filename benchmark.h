@@ -34,7 +34,7 @@ class SetDataSuite {
 };
 
 template<typename SetType>
-void DoBenchmark(std::vector<SetType*>& sets, std::string title,
+void DoBenchmark(std::string title, SetType type,
                  const SetDataSuite& set_data,
                  int contains_true_ratio, int includes_true_ratio,
                  int equals_true_ratio);

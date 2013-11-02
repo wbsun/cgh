@@ -15,6 +15,14 @@ PrimeSet::PrimeSet(const PrimeSet& ps) {
   size_ = ps.size_;
 }
 
+PrimeSet::PrimeSet(const SetDataSuite::SetData& data) {
+  mpz_init_set_ui(product_, 1UL);
+  size_ = data.data.size();
+  for (int i : data.data) {
+    mpz_mul_ui(product_, product_, (unsigned long)i);
+  }
+}
+
 PrimeSet::~PrimeSet() {
   mpz_clear(product_);
 }

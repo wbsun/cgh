@@ -1,6 +1,8 @@
 #ifndef CGH_PRIME_SET_H
 #define CGH_PRIME_SET_H
 
+#include "benchmark.h"
+
 #include <gmpxx.h>
 
 class PrimeSet {
@@ -9,6 +11,7 @@ class PrimeSet {
   PrimeSet();
   PrimeSet(const mpz_t p, int size);
   PrimeSet(const PrimeSet& ps);
+  PrimeSet(const SetDataSuite::SetData& data);
   virtual ~PrimeSet();
 
   const PrimeSet& operator=(const PrimeSet& ps);
