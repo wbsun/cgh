@@ -30,8 +30,9 @@ int main(int argc, char* argv[]) {
   if (argc == 9)
     latex_output = (atoi(argv[8]) != 0);
 
+
   if (latex_output)
-    cout << "Primes: " << double(set_size)/(double)primes_range << " " << primes_range << endl;
+    cout << "\\multirow{4}{*}{" << double(set_size)/(double)primes_range << "} & ";
 
   Primes primes(10000000, filename);
   SetDataSuite data_suite(num_sets, set_size, primes_range, primes);
@@ -68,7 +69,7 @@ int main(int argc, char* argv[]) {
                         latex_output);
 
   if (latex_output)
-    cout << endl;
+    cout << "\\hline" << endl;
 
   return 0;
 }

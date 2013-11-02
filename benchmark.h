@@ -198,7 +198,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
               << " & " << contains_time
               << " & " << delete_time
               << " & " << insert_time
-              << " // "
+              << " \\\\ "
               << std::endl;
   }
 }
