@@ -55,7 +55,7 @@ template<> struct less<utils::Element> {
   
 template<> struct hash<utils::Element> {
   size_t operator()(const utils::Element& e) const {
-    return e.val / (e.id+1);
+    return e.val / (e.id+1); // try to be fancy :)
   }
 };
 }

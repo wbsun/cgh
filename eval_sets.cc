@@ -11,10 +11,10 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-  if (argc != 8) {
+  if (argc != 8 && argc != 9) {
     cout << "Usage: " << argv[0] << " primes-file "
          << "num-sets set-size primes-range contains-true-ratio "
-         << "includes-true-ratio equals-true-ratio"
+         << "includes-true-ratio equals-true-ratio [latex-output]"
          << endl;
     return 0;
   }
@@ -26,6 +26,9 @@ int main(int argc, char* argv[]) {
   int contains_true_ratio = atoi(argv[5]);
   int includes_true_ratio = atoi(argv[6]);
   int equals_true_ratio = atoi(argv[7]);
+  bool latex_output = true;
+  if (argc == 9)
+    latex_output = (atoi(argv[8]) != 0);
 
   Primes primes(10000000, filename);
   SetDataSuite data_suite(num_sets, set_size, primes_range, primes);
@@ -33,23 +36,30 @@ int main(int argc, char* argv[]) {
   data_suite.CreateAllSetData();
   cout << "Done\n" << endl;
 
-  DoBenchmark<PrimeSet>("PrimeSet", data_suite, contains_true_ratio,
-                        includes_true_ratio, equals_true_ratio);
+  DoBenchmark<PrimeSet>("godel hash", data_suite, contains_true_ratio,
+                        includes_true_ratio, equals_true_ratio,
+                        latex_output);
 
-  cout << endl;
+  if (!latex_output)
+    cout << endl;
 
-  DoBenchmark<HashSet>("HashSet", data_suite, contains_true_ratio,
-                       includes_true_ratio, equals_true_ratio);
+  DoBenchmark<TreeSet>("sorted tree", data_suite, contains_true_ratio,
+                       includes_true_ratio, equals_true_ratio,
+                       latex_output);
 
-  cout << endl;
+  if (!latex_output)
+    cout << endl;
 
-  DoBenchmark<TreeSet>("TreeSet", data_suite, contains_true_ratio,
-                       includes_true_ratio, equals_true_ratio);
+  DoBenchmark<ArraySet>("sorted array", data_suite, contains_true_ratio,
+                       includes_true_ratio, equals_true_ratio,
+                       latex_output);
 
-  cout << endl;
+  if (!latex_output)
+    cout << endl;
 
-  DoBenchmark<ArraySet>("ArraySet", data_suite, contains_true_ratio,
-                        includes_true_ratio, equals_true_ratio);
+  DoBenchmark<HashSet>("hash set", data_suite, contains_true_ratio,
+                        includes_true_ratio, equals_true_ratio,
+                        latex_output);
   
   return 0;
 }
