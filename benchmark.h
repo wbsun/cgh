@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <locale>
 
 class SetDataSuite {
  public:
@@ -39,6 +40,10 @@ template<typename SetType>
 void DoBenchmark(std::string title, const SetDataSuite& set_data,
                  int contains_true_ratio, int includes_true_ratio,
                  int equals_true_ratio, bool latex = false) {
+  if (latex) {
+    std::cout.imbue(std::locale(""));
+  }
+  
   if (!latex)
     std::cout << "Benchmark on " << title << std::endl;
   else
