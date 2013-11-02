@@ -30,11 +30,17 @@ int main(int argc, char* argv[]) {
   if (argc == 9)
     latex_output = (atoi(argv[8]) != 0);
 
+  if (latex_output)
+    cout << "Primes: " << double(set_size)/(double)primes_range << " " << primes_range << endl;
+
   Primes primes(10000000, filename);
   SetDataSuite data_suite(num_sets, set_size, primes_range, primes);
-  cout << "Generating all set data ... "; cout.flush();
+  if (!latex_output) {
+    cout << "Generating all set data ... "; cout.flush();
+  }
   data_suite.CreateAllSetData();
-  cout << "Done\n" << endl;
+  if (!latex_output)
+    cout << "Done\n" << endl;
 
   DoBenchmark<PrimeSet>("godel hash", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio,
@@ -60,6 +66,9 @@ int main(int argc, char* argv[]) {
   DoBenchmark<HashSet>("hashset", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio,
                         latex_output);
-  
+
+  if (latex_output)
+    cout << endl;
+
   return 0;
 }
