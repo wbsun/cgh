@@ -30,8 +30,8 @@ int main(int argc, char* argv[]) {
   data_suite.CreateAllSetData();
   cout << "Done" << endl;
 
-  DoBenchmark("PrimeSet", PrimeSet(), data_suite, contains_true_ratio,
-              includes_true_ratio, equals_true_ratio);
+  DoBenchmark<PrimeSet>("PrimeSet", data_suite, contains_true_ratio,
+                        includes_true_ratio, equals_true_ratio);
   
   return 0;
 }
