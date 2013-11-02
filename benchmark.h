@@ -27,14 +27,16 @@ class SetDataSuite {
   
  private:
   std::vector<SetData> set_data_;
-  const Primes& primes_;
   int num_sets_;
   int size_;
   int range_;
+  const Primes& primes_;
 };
 
 template<typename SetType>
-void DoBenchmark(std::vector<std::pair<SetType*, SetType* > >& sets,
-                 std::string title);
+void DoBenchmark(std::vector<SetType*>& sets, std::string title,
+                 const SetDataSuite& set_data,
+                 int contains_true_ratio, int includes_true_ratio,
+                 int equals_true_ratio);
 
 #endif

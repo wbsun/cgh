@@ -6,7 +6,7 @@ CXXFLAGS_NO_OPT = -O0 -std=c++0x -Wall
 LDFLAGS = 
 GMP_LDFLAGS = -lgmpxx -lgmp
 
-OBJS = primes.o prime_set.o utils.o
+OBJS = primes.o prime_set.o utils.o benchmark.o
 LIBS =
 TEST-OBJS = primes-test.o prime_set-test.o
 TEST-EXES = primes-test prime_set-test
@@ -33,6 +33,9 @@ prime_set-test: prime_set-test.o prime_set.o primes.o utils.o
 	$(CXX) $^ -o $@ $(LDFLAGS) $(GMP_LDFLAGS)
 
 utils.o: utils.cc utils.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+benchmark.o: benchmark.cc benchmark.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 

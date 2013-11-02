@@ -68,6 +68,22 @@ void PrimeSet::Intersect(const PrimeSet& rhs, PrimeSet* r) const {
 }
 
 void PrimeSet::Differentiate(const PrimeSet& rhs, PrimeSet* r) const {
+  mpz_t gcd;
+  mpz_init_set_ui(gcd, 1UL);
+  mpz_gcd(gcd, product_, rhs.product_);
+
+  PrimeSet::ElemType ul_gcd;
+  if (mpz_cmp_ui(gcd, 1)) {
+    if (mpz_fits_ulong_p(gcd)) {
+      ul_gcd = mpz_get_ui(gcd);
+      mpz_divexact_ui(r->product_, r->product_, ul_gcd);
+    } else {
+      mpz_divexact(r->product_, r->product_, gcd);
+    }
+  }
+}
+
+void PrimeSet::DiffSym(const PrimeSet& rhs, PrimeSet* r) const {
   mpz_mul(r->product_, product_, rhs.product_);
   mpz_t gcd;
   mpz_init_set_ui(gcd, 1UL);
@@ -83,22 +99,6 @@ void PrimeSet::Differentiate(const PrimeSet& rhs, PrimeSet* r) const {
       mpz_divexact_ui(r->product_, r->product_, ul_gcd);
     } else {
       mpz_mul(gcd, gcd, gcd);
-      mpz_divexact(r->product_, r->product_, gcd);
-    }
-  }
-}
-
-void PrimeSet::Minus(const PrimeSet& rhs, PrimeSet* r) const {
-  mpz_t gcd;
-  mpz_init_set_ui(gcd, 1UL);
-  mpz_gcd(gcd, product_, rhs.product_);
-
-  PrimeSet::ElemType ul_gcd;
-  if (mpz_cmp_ui(gcd, 1)) {
-    if (mpz_fits_ulong_p(gcd)) {
-      ul_gcd = mpz_get_ui(gcd);
-      mpz_divexact_ui(r->product_, r->product_, ul_gcd);
-    } else {
       mpz_divexact(r->product_, r->product_, gcd);
     }
   }

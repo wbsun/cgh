@@ -25,7 +25,7 @@ class PrimeSet {
   virtual void Union(const PrimeSet& rhs, PrimeSet* r) const;
   virtual void Intersect(const PrimeSet& rhs, PrimeSet* r) const;
   virtual void Differentiate(const PrimeSet& rhs, PrimeSet* r) const;
-  virtual void Minus(const PrimeSet& rhs, PrimeSet* r) const;
+  virtual void DiffSym(const PrimeSet& rhs, PrimeSet* r) const;
 
   size_t num_bits() const;
   
