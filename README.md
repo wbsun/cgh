@@ -6,22 +6,24 @@ C version GodelHash
 Compile and Run:
   - Install libgmp-dev on Linux.
   - make
-  - ./prime_set-test 10000000 ./primes-db/primes10000000.txt 1000 500000
+  - ./eval_sets ./primes-db/primes10000000.txt 1000 5000 10000 50 50 50
 
-The program tests 1000 times of operations. 
-The command run above creates 1000 (hard-coded number) prime sets, each of them contains 1000 (specified 
-by the last '1000') random primes read from the given prime number file. '500000' specifies the number of
-the primes among which we choose the 1000 random primes to create a prime set.
+Usage: eval_sets prime-number-file times-of-operations set-size universe-size contains-true-ratio includes-true-ratio equals-true-ratio [latex-output]
 
-Current result:
-```
-wbsun@fe:/mnt/cgh$ ./prime_set-test 10000000 ./primes-db/primes10000000.txt 1000 500000
-Generating sets: .................................................................................................... Done
-Run contains ... Contains: 346 ns
-Run insert ... Insert: 400 ns
-Run remove ... Remove: 743 ns
-Run inclusion ... Inclusion: 442 ns
-Run equals ... Equals: 9 ns
-Run union ... Union: 429274 ns
-Run intersect ... Intersect: 393631 ns
-```
+This program runs each operations 'times-of-operations' times on sets containing 'set-size' elements randomly fetched from the 'universe-size' prime space.
+
+Evaluated on Emulab machine, hardware spec:
+  - Intel Xeon E5-1660 3.3GHz six-core CPU
+  - 32GB DDR3-2133 memory,
+  - Intel X79 chipset motherboard
+  - Smasung 840 Pro 128GB SSD.
+
+Implementation:
+  - GodelHash based primeset: using GNU GMP (GNU Multiple Precision Aritchmetic library) for big integer aritchmetic operations.
+  - Sorted Arrayset: using std::vector to store data, using std::binary_search, std::set_union/set_difference/includes/set_intersect algorithms for set operations.
+  - Sorted Treeset: using std::set, which is a red-black tree based set implementation.
+  - Hashset: using std::unordered_set, which is a bucket-based hashset.
+
+Output:
+  Times show are in nanoseconds for each single operation.
+  

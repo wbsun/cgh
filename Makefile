@@ -1,9 +1,9 @@
 CC = gcc
 CXX = g++
-CFLAGS = -O3 -Wall
-CXXFLAGS = -O3 -std=c++0x -Wall
+CFLAGS = -O2 -Wall
+CXXFLAGS = -O2 -std=c++0x -Wall
 CXXFLAGS_NO_OPT = -O0 -std=c++0x -Wall
-LDFLAGS = 
+LDFLAGS = -O2
 GMP_LDFLAGS = -lgmpxx -lgmp
 
 OBJS = primes.o prime_set.o utils.o benchmark.o eval_sets.o hashset.o treeset.o array_set.o

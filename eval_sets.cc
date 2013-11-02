@@ -43,21 +43,21 @@ int main(int argc, char* argv[]) {
   if (!latex_output)
     cout << endl;
 
-  DoBenchmark<TreeSet>("sorted tree", data_suite, contains_true_ratio,
+  DoBenchmark<TreeSet>("sorted treeset", data_suite, contains_true_ratio,
                        includes_true_ratio, equals_true_ratio,
                        latex_output);
 
   if (!latex_output)
     cout << endl;
 
-  DoBenchmark<ArraySet>("sorted array", data_suite, contains_true_ratio,
+  DoBenchmark<ArraySet>("sorted arrayset", data_suite, contains_true_ratio,
                        includes_true_ratio, equals_true_ratio,
                        latex_output);
 
   if (!latex_output)
     cout << endl;
 
-  DoBenchmark<HashSet>("hash set", data_suite, contains_true_ratio,
+  DoBenchmark<HashSet>("hashset", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio,
                         latex_output);
   
