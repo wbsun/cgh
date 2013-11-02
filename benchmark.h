@@ -73,7 +73,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   int threshold = 0;
   utils::Timing tm;
 
-  threshold = sets.size() / 100 * contains_true_ratio;
+  threshold = sets.size() * contains_true_ratio / 100;
   if (!latex) {
     std::cout << "Contains: "; std::cout.flush();
   }
@@ -113,7 +113,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   if (!latex)
     std::cout << delete_time << " ns" << std::endl;
 
-  threshold = sets.size() / 100 * includes_true_ratio;
+  threshold = sets.size() * includes_true_ratio / 100;
   if (!latex) {
     std::cout << "Includes: "; std::cout.flush();
   }
@@ -129,7 +129,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   if (!latex)
     std::cout << includes_time << " ns" << std::endl;
 
-  threshold = sets.size() / 100 * equals_true_ratio;
+  threshold = sets.size() * equals_true_ratio / 100;
   if (!latex) {
     std::cout << "Equals: "; std::cout.flush();
   }
