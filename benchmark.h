@@ -49,10 +49,10 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   int threshold = 0;
   utils::Timing tm;
 
-  threshold = sets.size() / 10 * contains_true_ratio;
+  threshold = sets.size() / 100 * contains_true_ratio;
   std::cout << "Contains: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     if (i < threshold)
       sets[i]->Contains(set_data.GetSetData(i).for_contains_in);
     else
@@ -70,7 +70,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
 
   std::cout << "Insert: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     dup_sets_insert[i]->Insert(set_data.GetSetData(i).for_insert);
   }
   tm.Stop();
@@ -78,16 +78,16 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
 
   std::cout << "Remove: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     dup_sets_remove[i]->Remove(set_data.GetSetData(i).for_remove);
   }
   tm.Stop();
   std::cout << (tm.ElapsedTime()*1000) / sets.size() << " ns" << std::endl;
 
-  threshold = sets.size() / 10 * includes_true_ratio;
+  threshold = sets.size() / 100 * includes_true_ratio;
   std::cout << "Includes: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     if (i < threshold)
       sets[i]->Includes(*dup_sets_remove[i]);
     else
@@ -96,10 +96,10 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   tm.Stop();
   std::cout << (tm.ElapsedTime()*1000) / sets.size() << " ns" << std::endl;
 
-  threshold = sets.size() / 10 * equals_true_ratio;
+  threshold = sets.size() / 100 * equals_true_ratio;
   std::cout << "Equals: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     if (i < threshold)
       sets[i]->Equals(*dup_sets[i]);
     else
@@ -111,7 +111,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
   SetType res;
   std::cout << "Union: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     sets[i]->Union(*sets[sets.size() - i - 1], &res);
   }
   tm.Stop();
@@ -119,7 +119,7 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
 
   std::cout << "Intersect: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     sets[i]->Intersect(*sets[sets.size() - i - 1], &res);
   }
   tm.Stop();
@@ -127,13 +127,13 @@ void DoBenchmark(std::string title, const SetDataSuite& set_data,
 
   std::cout << "Diff: "; std::cout.flush();
   tm.Start();
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     sets[i]->Differentiate(*sets[sets.size() - i - 1], &res);
   }
   tm.Stop();
   std::cout << (tm.ElapsedTime()*1000) / sets.size() << " ns" << std::endl;
 
-  for (int i = 0; i < sets.size(); ++i) {
+  for (int i = 0; i < (int)sets.size(); ++i) {
     delete sets[i];
     delete dup_sets[i];
     delete dup_sets_insert[i];
