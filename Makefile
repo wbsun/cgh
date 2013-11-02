@@ -6,7 +6,7 @@ CXXFLAGS_NO_OPT = -O0 -std=c++0x -Wall
 LDFLAGS = 
 GMP_LDFLAGS = -lgmpxx -lgmp
 
-OBJS = primes.o prime_set.o utils.o benchmark.o eval_sets.o
+OBJS = primes.o prime_set.o utils.o benchmark.o eval_sets.o hashset.o
 LIBS =
 TEST-OBJS = primes-test.o prime_set-test.o
 TEST-EXES = primes-test prime_set-test
@@ -38,10 +38,13 @@ utils.o: utils.cc utils.h
 benchmark.o: benchmark.cc benchmark.h utils.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
+hashset.o: hashset.cc hashset.h
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
 eval_sets.o: eval_sets.cc *.h
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 
-eval_sets: primes.o utils.o benchmark.o prime_set.o eval_sets.o
+eval_sets: primes.o utils.o benchmark.o prime_set.o hashset.o eval_sets.o
 	$(CXX) $^ -o $@ $(LDFLAGS) $(GMP_LDFLAGS)
 
 .PHONY:	clean

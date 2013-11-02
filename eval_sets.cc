@@ -1,4 +1,5 @@
 #include "prime_set.h"
+#include "hashset.h"
 #include "utils.h"
 #include "benchmark.h"
 
@@ -31,6 +32,9 @@ int main(int argc, char* argv[]) {
   cout << "Done" << endl;
 
   DoBenchmark<PrimeSet>("PrimeSet", data_suite, contains_true_ratio,
+                        includes_true_ratio, equals_true_ratio);
+
+  DoBenchmark<HashSet>("HashSet", data_suite, contains_true_ratio,
                         includes_true_ratio, equals_true_ratio);
   
   return 0;
