@@ -36,6 +36,7 @@ class SetDataSuite {
   const Primes& primes_;
 };
 
+
 template<typename SetType>
 void DoBenchmark(std::string title, const SetDataSuite& set_data,
                  int contains_true_ratio, int includes_true_ratio,
